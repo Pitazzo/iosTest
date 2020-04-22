@@ -1,0 +1,32 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  
+jobs:
+  build:
+    name: Build app
+    runs-on: macos-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    - name: install dependencies
+      uses: steebchen/flutter@v1.0.0
+      with:
+        args: pub get
+    - name: build apk
+      uses: steebchen/flutter@v1.0.0
+      with:
+        args: build ios --release      
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: app-snapshot
+        path: iosTestApp/build
