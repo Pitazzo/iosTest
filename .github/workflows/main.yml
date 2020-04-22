@@ -24,7 +24,7 @@ jobs:
       with:
         channel: 'stable'
     - run: flutter pub get
-    - run: flutter build ios --release
+    - run: flutter build ios --debug
     - name: Upload artifact
       uses: actions/upload-artifact@v1
       with:
